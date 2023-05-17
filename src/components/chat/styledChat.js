@@ -1,11 +1,11 @@
 import styled from 'styled-components'
-import { ReactComponent as File } from './file.svg'
+
 
 export const Wrapper = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: space-around;
-    
+    width: 100vw;
    
 `
 
@@ -20,13 +20,14 @@ export const chatContact = styled.div`
     flex-direction: row;
     align-items: center;
     justify-content: flex-start
-    margin-left: 30px;
+    column-gap:12px;
 `
 
 export const contactLogo = styled.img`
     box-sizing: border-box;
     width: 50px;
     height: 50px;
+    margin-left: 30px;
 `
 
 export const contactName = styled.h2`
@@ -37,10 +38,11 @@ export const contactName = styled.h2`
     color: #6B7C85;
     width: 111px;
     height: 23px;
+    margin-left: 12px;
 `
 
 export const chatMain = styled.div`
-    height: 860px;
+    height: 82vh;
     background-color: #f0ece4;
 `
 
@@ -48,12 +50,9 @@ export const chatBottom = styled.div`
     display:flex;
     flex-direction: row;
     justify-content: space-around;
-`
-
-export const inputFile = styled.input`
-    width: 24px;
-    height: 24px;
-    background:${File};
+    background: #F0F2F5;
+    height: 90px;
+    align-items:center;
 `
 
 export const inputMessage = styled.input`
@@ -62,9 +61,39 @@ export const inputMessage = styled.input`
     background: #FFFFFF;
     border-radius: 10px;
     font-weight: 500;
+    border:1px solid #FFFFFF;
     font-size: 14px;
     line-height: 16px;
     letter-spacing: -0.025em;
     color: #6B7C85;
-    margin-left: 69px;
+    padding-left:20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    &::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #6B7C85;
+    
+    }
+    &:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #6B7C85;
+  
+    opacity:  1;
+    }
+    &::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #6B7C85;
+   
+    opacity:  1;
+    }
+    &:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:    #6B7C85;
+    
+    }
+    &::-ms-input-placeholder { /* Microsoft Edge */
+    color:    #6B7C85;
+    
+    }
+
+    &::placeholder { /* Most modern browsers support this now. */
+    color:    #6B7C85;
+   
+    }
 `
