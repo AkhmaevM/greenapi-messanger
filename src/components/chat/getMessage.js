@@ -7,16 +7,16 @@ const chatId = "79055800483@c.us";
 
 export function getMessage() {
     
-    axios.get(`${host}}/waInstance${idInstance}}/sendMessage/${apiTokenInstance}`,{
-        headers: 'application/json',
-      }).then(function (response) {
+    axios.get(`${host}}/waInstance${idInstance}}/ReceiveNotification/${apiTokenInstance}`
+      ).then(function (response) {
         console.log(response);
+        console.log("message getted");
       })
       .catch(function (error) {
         console.log(error);
       });
 
-    console.log("message sended");
+    
 
 }
 
