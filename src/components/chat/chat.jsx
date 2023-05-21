@@ -7,36 +7,39 @@ const idInstance = "1101821540";
 const apiTokenInstance = "3b30a2771999490b8570de933b9d515fb40c203e148d42a7a6";
 const chatId = "79055800483";
 
+const getMessage = () =>{
+  setTimeout(() => {
+    axios.get(
+      `${host}/waInstance${idInstance}/receiveNotification/${apiTokenInstance}`
+    , {mode: 'no-cors'})
+      .then((response) =>{
+        console.log(response.data.body);
+        console.log("message getted");
+      })
+      .catch((error) => console.log("error", error));
+  }, 5000);
+}
+
 export const Chat = ({ contactImg, contactName }) => {
   const [message, setMessage] = useState("");
 
-  // useEffect(()=>{
-  //  setTimeout(() => {
-  //   axios.get(`${host}}/waInstance${idInstance}}/ReceiveNotification/${apiTokenInstance}`
-  //   ).then(function (response) {
-  //     console.log(response);
-  //     console.log("message getted");
-  //   })
-  //   .catch(function (error) {
-  //     console.log(error);
-  //   });
-  //  }, 5000);
-  // })
+  useEffect(() => {
+    getMessage()
+  });
 
-
-  const handleChange = (e)=>{
-    setMessage(e.target.value)
-  }
+  const handleChange = (e) => {
+    setMessage(e.target.value);
+  };
 
   const sendMessage = () => {
     const atribute = {
       chatId: `${chatId}@c.us`,
       message: message,
     };
-    
+
     axios
       .post(
-        `https://api.green-api.com/waInstance1101821540/sendMessage/3b30a2771999490b8570de933b9d515fb40c203e148d42a7a6`,
+        `${host}/waInstance${idInstance}/sendMessage/${apiTokenInstance}`,
         atribute
       )
       .then(function (response) {
@@ -47,8 +50,7 @@ export const Chat = ({ contactImg, contactName }) => {
       .catch(function (error) {
         console.log(error);
       });
-      setMessage(" ");
-    
+    setMessage(" ");
   };
 
   return (
@@ -72,7 +74,7 @@ export const Chat = ({ contactImg, contactName }) => {
 
         <button onClick={sendMessage}>Send</button>
 
-        <button >get</button>
+        <button>get</button>
       </S.chatBottom>
     </S.Wrapper>
   );
