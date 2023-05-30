@@ -44,6 +44,12 @@ export const contactName = styled.h2`
 export const chatMain = styled.div`
     height: 82vh;
     background-color: #f0ece4;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 15px;
+    align-items: flex-end
+
 `
 
 export const chatBottom = styled.div`

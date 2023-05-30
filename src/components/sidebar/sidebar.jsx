@@ -5,18 +5,15 @@ import * as S from "./styledSidebar";
 export const Sidebar = () => {
   const [value, setValue] = useState("");
   const [contacts, setContacts] = useState([]);
-  const [count, setCount] = useState(0)
 
-  let currentContact = [];
 
   const appendContact = (e) => {
     if (e.keyCode === 13) {
-      currentContact.push(value)
-      console.log(currentContact);
+     
       contacts.push(<Contact name={value}/>)
-       console.log(contacts);                                                                                                                                                                           
+      console.log(contacts);                                                                                                                                                                           
       setValue("");
-      setCount(count + 1)
+      setContacts(contacts)
     }
   };
 
