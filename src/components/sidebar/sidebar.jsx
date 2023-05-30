@@ -1,45 +1,42 @@
-import React, {useEffect, useState} from "react";
+import React, { useState } from "react";
 import { Contact } from "../contact/contact";
-import * as S from './styledSidebar'
+import * as S from "./styledSidebar";
 
-export const Sidebar = ()=>{
+export const Sidebar = () => {
+  const [value, setValue] = useState("");
+  const [contacts, setContacts] = useState([]);
+  const [count, setCount] = useState(0)
 
-    const [value, setValue] = useState('')
-    const [contact, setContact] = useState(false)
+  let currentContact = [];
 
-    let currentContact = []
-    let children = [];
-
-    
-    const handleClick = () =>{
-        currentContact.push(value)
-        console.log(currentContact);
-        for (let i = 0; i < currentContact.length; i ++) {
-            children.push(<Contact name={value} />);
-          };
-        console.log(children);
-        setValue('')
-        setContact(true)
+  const appendContact = (e) => {
+    if (e.keyCode === 13) {
+      currentContact.push(value)
+      console.log(currentContact);
+      contacts.push(<Contact name={value}/>)
+       console.log(contacts);                                                                                                                                                                           
+      setValue("");
+      setCount(count + 1)
     }
+  };
 
+  return (
+    <S.sidebarWrapper>
+      <S.sidebarTop>
+        <S.contactSearch
+          type="search"
+          placeholder="Search or start new chat"
+          onChange={(e) => setValue(e.target.value)}
+          value={value}
+          onKeyUp={appendContact}      
+        />
+      </S.sidebarTop>
 
-    return(
-
-        <S.sidebarWrapper>
-            <S.sidebarTop>
-                <S.contactSearch type="search"  placeholder="Search or start new chat"
-                    onChange={e=>setValue(e.target.value)}
-                    value={value}
-                />
-
-                <button onClick={handleClick}>Add chat</button>
-            </S.sidebarTop>
-
-            <S.contactsList>
-                { children.map(({name})=>
-                    <Contact name={name} />
-                )}
-            </S.contactsList>
-        </S.sidebarWrapper>
-    )
-}
+      <S.contactsList>
+        {
+          contacts
+        }
+      </S.contactsList>
+    </S.sidebarWrapper>
+  );
+};

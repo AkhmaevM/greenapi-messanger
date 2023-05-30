@@ -1,18 +1,18 @@
 import React from "react";
 import * as S from './styledContanct'
 
-export const Contact = ({img, name, message, time}) =>{
+export const Contact = (props) =>{
 
     return(
         <S.contactsWrapper>
-            <S.contactLogo src={img}  />
+            <S.contactLogo src={props.img}  />
 
             <S.contactMain>
-                <S.contactName>{name}</S.contactName>
-                <S.contactMessage>{message}</S.contactMessage>
+                <S.contactName>{props.name}</S.contactName>
+                <S.contactMessage>{props.message}</S.contactMessage>
             </S.contactMain>
 
-            <S.messageTime>{time}</S.messageTime>
+            <S.messageTime>{props.time}</S.messageTime>
         </S.contactsWrapper>
     )
 }

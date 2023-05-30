@@ -16,7 +16,5 @@ export function getMessage() {
         console.log(error);
       });
 
-    
-
-}
+    }
 

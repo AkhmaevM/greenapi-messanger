@@ -3,10 +3,9 @@ import styled from 'styled-components'
 
 export const contactsWrapper = styled.div`
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     border-bottom: 1px solid #E9EDEF;
     margin: 25px;
-
     cursor: pointer;
 `
 

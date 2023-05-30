@@ -13,7 +13,7 @@ const getMessage = () =>{
       `${host}/waInstance${idInstance}/receiveNotification/${apiTokenInstance}`
     , {mode: 'no-cors'})
       .then((response) =>{
-        console.log(response.data.body);
+        console.log(response);
         console.log("message getted");
       })
       .catch((error) => console.log("error", error));
@@ -31,26 +31,28 @@ export const Chat = ({ contactImg, contactName }) => {
     setMessage(e.target.value);
   };
 
-  const sendMessage = () => {
-    const atribute = {
-      chatId: `${chatId}@c.us`,
-      message: message,
-    };
-
-    axios
-      .post(
-        `${host}/waInstance${idInstance}/sendMessage/${apiTokenInstance}`,
-        atribute
-      )
-      .then(function (response) {
-        console.log(response);
-        console.log("message sended");
-        setMessage("");
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-    setMessage(" ");
+  const sendMessage = (e) => {
+    if(e.keyCode===13){
+      const atribute = {
+        chatId: `${chatId}@c.us`,
+        message: message,
+      };
+  
+      axios
+        .post(
+          `${host}/waInstance${idInstance}/sendMessage/${apiTokenInstance}`,
+          atribute
+        )
+        .then(function (response) {
+          console.log(response);
+          console.log("message sended");
+          setMessage("");
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+      setMessage(" ");
+    }
   };
 
   return (
@@ -70,9 +72,8 @@ export const Chat = ({ contactImg, contactName }) => {
           onChange={handleChange}
           placeholder="Type a message"
           value={message}
+          onKeyUp={sendMessage}
         />
-
-        <button onClick={sendMessage}>Send</button>
 
         <button>get</button>
       </S.chatBottom>
