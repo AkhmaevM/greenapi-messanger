@@ -11,7 +11,7 @@ function App() {
 
       <S.Container>
         <Sidebar />
-        <Chat  contactName='user1'/>
+        <Chat />
       </S.Container>
 
     </div>

@@ -8,35 +8,27 @@ import { PostMessageList } from "../messages/styledPostMessage";
 const host = "https://api.green-api.com";
 const idInstance = "1101821540";
 const apiTokenInstance = "3b30a2771999490b8570de933b9d515fb40c203e148d42a7a6";
-const chatId = "79055800483";
+let chatId;
 
-// const getMessage = () =>{
-//   setTimeout(() => {
-//     axios.get(
-//       `${host}/waInstance${idInstance}/receiveNotification/${apiTokenInstance}`
-//     , {mode: 'no-cors'})
-//       .then((response) =>{
-//         console.log(response);
-//         console.log("message getted");
-//       })
-//       .catch((error) => console.log("error", error));
-//   }, 5000);
-// }
+
 
 export const Chat = (props) => {
   const [message, setMessage] = useState("");
   const [chat, setChat] = useState([])
 
   useEffect(() => {
-    // getMessage()
+    // setInterval(() => {
+    //   getMessage()
+    // }, 5000);
+  
   });
 
   const handleChange = (e) => {
     setMessage(e.target.value);
   };
 
-  
 
+  
   const sendMessage = (e) => {
     if(e.keyCode===13){
       const atribute = {
@@ -89,7 +81,6 @@ export const Chat = (props) => {
           onKeyUp={sendMessage}
         />
 
-        <button>get</button>
       </S.chatBottom>
     </S.Wrapper>
   );
