@@ -1,19 +1,14 @@
 import React from "react";
 import GlobalStyle from "./globalStyles";
-import { Chat } from "./components/chat/chat";
-import { Sidebar } from "./components/sidebar/sidebar";
-import * as S from './styledApp'
+import AppRoutes  from './components/pages/routes'
 
 function App() {
+
   return (
+    
     <div>
       <GlobalStyle />
-
-      <S.Container>
-        <Sidebar />
-        <Chat />
-      </S.Container>
-
+      <AppRoutes />
     </div>
   );
 }

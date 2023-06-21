@@ -6,7 +6,6 @@ export const Wrapper = styled.div`
     flex-direction: column;
     justify-content: space-around;
     width: 100vw;
-   
 `
 
 export const chatTop = styled.div`
@@ -42,7 +41,7 @@ export const contactName = styled.h2`
 `
 
 export const chatMain = styled.div`
-    height: 82vh;
+    height: 75vh;
     background-color: #f0ece4;
     display: flex;
     flex-direction: column;
@@ -57,13 +56,13 @@ export const chatBottom = styled.div`
     flex-direction: row;
     justify-content: space-around;
     background: #F0F2F5;
-    height: 90px;
+    height:14vh;
     align-items:center;
 `
 
 export const inputMessage = styled.input`
-    width: 914px;
-    height: 50px;
+    width: 50vw;
+    height: 8vh;
     background: #FFFFFF;
     border-radius: 10px;
     font-weight: 500;

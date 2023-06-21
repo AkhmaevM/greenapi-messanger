@@ -2,47 +2,39 @@ import React, { useEffect } from "react";
 import * as S from "./styledChat";
 import { useState } from "react";
 import axios from "axios";
-import { PostMessage }  from "../messages/postMessage";
+import { PostMessage } from "../messages/postMessage";
 import { PostMessageList } from "../messages/styledPostMessage";
-
-const host = "https://api.green-api.com";
-const idInstance = "1101821540";
-const apiTokenInstance = "3b30a2771999490b8570de933b9d515fb40c203e148d42a7a6";
-let chatId;
-
-
+import { GetMessage } from "../messages/getMessage";
+import { GetMessageList } from "../messages/styledGetMessage";
 
 export const Chat = (props) => {
-  const [message, setMessage] = useState("");
-  const [chat, setChat] = useState([])
+  const host = "https://api.green-api.com";
 
-  useEffect(() => {
-    // setInterval(() => {
-    //   getMessage()
-    // }, 5000);
-  
-  });
+  // 1101821540
+  // 3b30a2771999490b8570de933b9d515fb40c203e148d42a7a6
+
+  const [message, setMessage] = useState("");
+  const [postMessage, setPostMessage] = useState([]);
+
+  const [getMessage, setGetMessage] = useState([]);
 
   const handleChange = (e) => {
     setMessage(e.target.value);
   };
 
-
-  
   const sendMessage = (e) => {
-    if(e.keyCode===13){
+    if (e.keyCode === 13) {
       const atribute = {
-        chatId: `${chatId}@c.us`,
+        chatId: `${props.number}@c.us`,
         message: message,
       };
-      
-      chat.push(<PostMessage message={message} />)
-      setChat(chat)
-      console.log(chat);
+
+      postMessage.push(<PostMessage message={message} />);
+      setPostMessage(postMessage);
 
       axios
         .post(
-          `${host}/waInstance${idInstance}/sendMessage/${apiTokenInstance}`,
+          `${host}/waInstance${props.instance}/sendMessage/${props.token}`,
           atribute
         )
         .then(function (response) {
@@ -56,20 +48,57 @@ export const Chat = (props) => {
       setMessage(" ");
     }
   };
+  console.log(props.token);
+  console.log(props.number);
+  const getMessages = () => {
+    axios
+      .get(
+        `${host}/waInstance${props.instance}/receiveNotification/${props.token}`,
+        { mode: "no-cors" }
+      )
+      .then((response) => {
+        if (
+          response.data.body.messageData === undefined ||
+          response.data.body.senderData.chatId !== `${props.number}@c.us`
+        ) {
+          axios.delete(
+            `${host}/waInstance${props.instance}/deleteNotification/${props.token}/${response.data.receiptId}`,
+            { mode: "no-cors" }
+          );
+        }
+        else if (response.data.body.senderData.chatId === `${props.number}@c.us`) {
+          console.log(
+            response.data.messageData.textMessageData.textMessage
+          );
+          getMessage.push(<GetMessage message={message} />);
+          setGetMessage(
+            response.data.body.messageData.textMessageData.textMessage
+          );
+        }
+      })
+      .catch(function (error) {
+        console.log("error", error);
+      });
+  };
+  useEffect(() => {
+    setInterval(() => {
+      getMessages();
+    }, 5000);
+  }, );
 
   return (
     <S.Wrapper>
       <S.chatTop>
         <S.chatContact>
           <S.contactLogo src={props.contactImg} />
-          <S.contactName>{chatId}</S.contactName>
+          <S.contactName>{props.number}</S.contactName>
         </S.chatContact>
       </S.chatTop>
 
       <S.chatMain>
-          <PostMessageList>
-            {chat}
-          </PostMessageList>
+        <PostMessageList>{postMessage}</PostMessageList>
+
+        <GetMessageList>{getMessage}</GetMessageList>
       </S.chatMain>
 
       <S.chatBottom>
@@ -80,7 +109,6 @@ export const Chat = (props) => {
           value={message}
           onKeyUp={sendMessage}
         />
-
       </S.chatBottom>
     </S.Wrapper>
   );

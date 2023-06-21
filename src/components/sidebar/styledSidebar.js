@@ -57,7 +57,7 @@ export const contactSearch = styled.input`
     }
 `
 
-export const contactsList = styled.div`
+export const contactsList = styled.ul`
     display:flex;
     flex-direction: column;
     row-gap: 20px;

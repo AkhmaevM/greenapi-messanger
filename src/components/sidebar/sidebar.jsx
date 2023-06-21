@@ -1,34 +1,30 @@
 import React, { useState } from "react";
 import { Contact } from "../contact/contact";
 import * as S from "./styledSidebar";
-import { useDispatch, useSelector } from "react-redux";
 
-export const Sidebar = () => {
+export const Sidebar = (props) => {
   const [value, setValue] = useState("");
   const [contacts, setContacts] = useState([]);
-
-  
 
   const appendContact = (e) => {
     if (e.keyCode === 13) {
       contacts.push(<Contact name={value} />);
-      console.log(contacts);
       console.log(value);
       setValue("");
       setContacts(contacts);
     }
   };
 
-  const dispatch = useDispatch();
-  const contact = useSelector((state) => state.contact);
- 
-
-
-  const addContact = () =>{
-    dispatch({type: 'ADD_CONTACT', payload: {contact: contact}})
-  }
-
   
+
+  const addContact = (e) => {
+    console.log(e.target.textContent);
+    localStorage.setItem("contact", e.target.textContent);
+    console.log(localStorage.getItem("contact"));
+
+    props.changeNumber(e.target.textContent);
+  };
+
   return (
     <S.sidebarWrapper>
       <S.sidebarTop>
@@ -42,8 +38,12 @@ export const Sidebar = () => {
       </S.sidebarTop>
 
       <S.contactsList
-        onClick={addContact()}
-      >{contacts}</S.contactsList>
+        onClick={(e) => {
+          addContact(e);
+        }}
+      >
+        {contacts}
+      </S.contactsList>
     </S.sidebarWrapper>
   );
 };

@@ -1,17 +1,17 @@
 import styled from 'styled-components'
 
 
-export const PostMessageWrapperGreen = styled.div`
+export const GetMessageWrapper = styled.div`
     width: 256px;
     height: 48px;
-    background: #D9FDD3; 
+    background: #FFFF; 
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
 `
 
-export const PostMessageText = styled.p`
+export const GetMessageText = styled.p`
     font-family: 'Work Sans';
     font-style: normal;
     font-weight: 400;
@@ -21,14 +21,13 @@ export const PostMessageText = styled.p`
     color: #111B21;
 `
 
-export const PostMessageList = styled.div`
+export const GetMessageList = styled.div`
     
     display: flex;
     flex-direction: column;
     gap: 4px;
     margin-right: 15px;
     width: 100%
-    align-items: flex-end
-
+    align-items: flex-start;
 `
 
